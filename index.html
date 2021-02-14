@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="require.js"></script>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="navbar">
+        <div class="nav_container">
+            <!-- <h1>This is NAVBAR</h1> -->
+            <div class="navbar_toggle">
+                <ul class="navbar_menu">
+                    <li class="nav_item">
+                        <a href="home.html" class="navbar_link">Home</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="index.html" class="navbar_link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="signup">
+        <p id="heading"></p>
+        <form action="" class="signup_form" id="old">
+            <!-- patterns, autofocus, required, email-->
+            <!-- <label for="user">Username:</label>
+            <input type="text" id="username" required="required" autofocus="autofocus" pattern="^[a-zA-Z\-]+$" title="There is not the correct format of username"/><br /><br />
+            <label for="user">Password:</label>
+            <input type="password" name="password" id="password" required="required"  pattern="^[A-Za-z]\w{7,14}$" title="There is not the correct format of password"/><br /><br />
+            <label for="user">Confirm Password:</label>
+            <input type="password" name="conPassword"  id="conPassword" required="required"/><br /><br />
+            <label for="email">email:</label>
+            <input type="email" name="email"  id="email" required="required"/><br /><br />
+            <label for="zip">zip:</label>
+            <input type="text" id="zip" pattern="[0-9]{5}" title="Five digits zip code" required="required"/><br /><br />
+            <br /> -->
+            <label for="user">Username:</label>
+            <input type="text" id="username" required="required" autofocus="autofocus" oninput="storeUser()"/><br /><br />
+            <label for="user">Password:</label>
+            <input type="password" name="password" id="password" required="required" oninput="storePass()"/><br /><br />
+            <label for="user">Confirm Password:</label>
+            <input type="password" name="conPassword" id="conPassword" required="required" /><br /><br />
+            <!-- <label for="email">email:</label>
+            <input type="text" name="email" id="email" required="required" /><br /><br />
+            <label for="zip">zip:</label>
+            <input type="text" id="zip" pattern="[0-9]{5}" title="Five digits zip code" required="required" /><br /><br />
+            <br /> -->
+            <input type="submit" id="sbutton" value="Submit" onclick="login()"/><br />
+        </form>
+        <div>
+            <!-- Here are all the old users in the website:  -->
+            <input type="text" id="search_input">
+            <button onclick="search()">Search</button>
+            <p id="user_list"></p>
+            <p id="user_info"></p>
+            <button onclick="addUser()">Add User</button>
+            <!-- Here are all the new users in the website: -->
+            <button onclick="refresh()">Refresh</button>
+            <!-- <p id="user_info_new"></p> -->
+            <button onclick="avgAge()">Get Avg Age</button>
+            <p id="age"></p>
+        </div>
+        
+    </section>
+    <footer>
+        <p>This is FOOTER</p>
+    </footer>
+    <script src="app.js"></script>
+    <script type="module" src="usingUser.js"></script>
+    <!-- <script src="api.js"></script> -->
+    <script>
+        // Check browser support
+        function storeUser() {
+            var username = document.getElementById('username').value;
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                localStorage.setItem("username", username);
+                // console.log(localStorage.getItem("username"));
+            } else {
+                document.getElementById("localStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+            var password = document.getElementById('password').value;
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                sessionStorage.setItem("password", password);
+            } else {
+                document.getElementById("sessionStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        }
+        function storePass() {
+            var password = document.getElementById('password').value;
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                sessionStorage.setItem("password", password);
+            } else {
+                document.getElementById("sessionStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        }
+    </script>
+</body>
+</html>
