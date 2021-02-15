@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Refersh</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" class="navbar_link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" class="navbar_link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="signup">
+        <p id="heading"></p>
+        <main>
+            <h5 id="heading">arrow functions, typeof</h5>
+            <form style="width: 40%; margin: 0 auto;" onsubmit="return signup()">
+                <input type="text" id="username" required="required" autofocus="autofocus" pattern="^[a-zA-Z\-]+$"
+                    title="There is not the correct format of username" placeholder="Username" class="form-control"/><br />
+                <input type="password" name="password" id="password" required="required" pattern="^[A-Za-z]\w{7,14}$"
+                    title="There is not the correct format of password" placeholder="Password" class="form-control"/><br />
+                <input type="password" name="conPassword" id="conPassword" class="form-control" required="required" placeholder="Confirm Password"/><br />
+                <input type="email" name="email" id="email" required="required" class="form-control" placeholder="Email"/><br />
+                <input type="text" id="zip" pattern="[0-9]{5}" title="Five digits zip code" class="form-control" required="required" placeholder="Zip" /><br /><br />
+                <div class="checkbox mb-3">
+                    <label>
+                        Already had an account? signin now!
+                    </label>
+                    <a href="/">Sign In</a>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit" id="sbutton" value="Submit">Sign up</button>
+            </form>
+        </main>
+    </section>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    <script src="javascripts/app.js"></script>
+    <script type="module" src="javascripts/usingUser.js"></script>
+</body>
+
+</html>

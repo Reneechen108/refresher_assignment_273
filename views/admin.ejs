@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Refersh</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" class="navbar_link">Home</a>
+                    </li>
+                    <li class="nav-item" id="logged">
+                        <a class="nav-link" href="/" class="navbar_link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="jumbotron" >
+            <h1 class="display-4 fw-normal"><p id="heading"></p></h1>
+        </div>
+        <div style="width: 60%; margin: 0 auto;">
+            <div class="jumbotron">
+                <h5>split, slice</h5>
+                <button class="btn btn-outline-success" type="submit" onclick="displayUser()">Display User</button>
+            </div>
+            <div class="jumbotron">
+                <h5>regular expressions</h5>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_input">
+                <button class="btn btn-outline-success" type="submit" onclick="return search()">Search</button>
+            </div>
+            <div class="jumbotron">
+                <h5>JSON.stringify, JSON.parse</h5>
+                <button type="button" class="btn btn-success" onclick="addUser()">Add User</button>
+            </div>
+            <div class="jumbotron">
+                <h5>rest operator</h5>
+                <button type="button" class="btn btn-success" onclick="refresh()">Refresh</button>
+            </div>
+            <div class="card">
+                <h5>includes, spread, arguments, Object.assign</h5>
+                <h5>a. call, apply, bind</h5>
+                <div class="card-body">
+                    <h5 class="card-title">User Info</h5>
+                    <p id="user_list" class="card-text"></p>
+                    <p id="user_info" class="card-text"></p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+
+    </section>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    <script src="javascripts/app.js"></script>
+    <script>
+        function logout() {
+            localStorage.setItem("username", '');
+        }
+        let username = localStorage.getItem("username");
+        console.log(username);
+        if (username.length !== 0) {
+            document.getElementById('logged').innerHTML = `<li class="nav-item">
+                                <a class="nav-link" href="/" class="navbar_link" id="logged" onclick="logout()">Logout</a>
+                            </li>`;
+        }
+    </script>
+
+</body>
+
+</html>

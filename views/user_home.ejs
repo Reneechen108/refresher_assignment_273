@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Refersh</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" class="navbar_link">Home</a>
+                    </li>
+                    <li class="nav-item" id="logged">
+                        <a class="nav-link" href="/" class="navbar_link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div>
+            <div class="userInfo" id="old"></div>
+            <div class="info" style="width: 60%; margin: 0 auto;">
+                <div class="jumbotron">
+                    <h5>localStorage and sessionStorage</h5>
+                    <p>Hi, <span id="localStorage"></span></p>
+                    <p>Here is your password: <span id="sessionStorage"></span></p>
+                </div>
+                <div class="jumbotron">
+                    <h5>b. var, let, const</h5>
+                    <button type="button" class="btn btn-success" onclick="different()" id="get-btn">GET Different</button>
+                </div>
+                <div class="jumbotron">
+                    <h5>c. Async and await, External API call, Promise, Callbacks</h5>
+                    <button type="button" class="btn btn-success" onclick="getData()" id="get-btn">GET Data(fetch)</button>
+                    <button type="button" class="btn btn-success" onclick="getOverview()" id="get-btn">GET Overview(Promise)</button>
+                    <button type="button" class="btn btn-success" onclick="getTop()" id="get-btn">GET Top(Callbacks)</button>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Houses Info</h5>
+                            <p id="result_data" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <h5>Geolocation​ and ​Events</h5>
+                    <button type="button" class="btn btn-success" onclick="getLocation()" id="get-btn">Get Location</button>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Location Info</h5>
+                            <p id="result_location" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    <script src="javascripts/api.js"></script>
+
+    <script>
+        document.getElementById("localStorage").innerHTML = localStorage.getItem("username");
+        document.getElementById("sessionStorage").innerHTML = sessionStorage.getItem("password");
+    </script>
+    <script>
+        function logout() {
+            localStorage.setItem("username", '');
+        }
+        let username = localStorage.getItem("username");
+        console.log(username);
+        if (username.length !== 0) {
+            document.getElementById('logged').innerHTML = `<li class="nav-item">
+                                <a class="nav-link" href="/" class="navbar_link" id="logged" onclick="logout()">Logout</a>
+                            </li>`;
+            document.getElementById('localStorage').innerHTML = localStorage.getItem("username");
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refresh</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Refersh</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" class="navbar_link">Home</a>
+                    </li>
+                    <li class="nav-item" id="logged">
+                        <a class="nav-link" href="/" class="navbar_link">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="signup">
+        <p id="heading"></p>
+        <main class="form-signin">
+            <h5 id="heading">arrow functions, typeof</h5>
+            <form style="width: 40%; margin: 0 auto; text-align: center;" id="old" onsubmit="return login()">
+                <input type="text" id="username" required="required" autofocus="autofocus" pattern="^[a-zA-Z\-]+$"
+                    title="There is not the correct format of username" placeholder="Username" class="form-control" oninput="storeUser()"/><br /><br />
+                <input type="password" name="password" id="password" required="required" pattern="^[A-Za-z]\w{7,14}$"
+                    title="There is not the correct format of password" placeholder="Password" class="form-control" oninput="storePass()"/><br />
+                <div class="checkbox mb-3">
+                    <label>
+                        Haven't have an account? signup now!
+                    </label>
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit" id="sbutton" value="Submit">Sign in</button>
+            </form>
+        </main>
+        
+    </section>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    <script src="javascripts/app.js"></script>
+    <script type="module" src="javascripts/usingUser.js"></script>
+    <!-- <script src="api.js"></script> -->
+    <script>
+        // Check browser support
+        function storeUser() {
+            var username = document.getElementById('username').value;
+            console.log("this is username", username);
+            if (typeof (Storage) !== "undefined" && localStorage.getItem("username") !== username) {
+                // Store
+                localStorage.setItem("username", username);
+                // console.log(localStorage.getItem("username"));
+            } else {
+                document.getElementById("localStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+            var password = document.getElementById('password').value;
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                sessionStorage.setItem("password", password);
+            } else {
+                document.getElementById("sessionStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        }
+        function storePass() {
+            var password = document.getElementById('password').value;
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                sessionStorage.setItem("password", password);
+            } else {
+                document.getElementById("sessionStorage").innerHTML = "Sorry, your browser does not support Web Storage...";
+            }
+        }
+    </script>
+    <script>
+        function logout() {
+            localStorage.setItem("username", '');
+        }
+        let username = localStorage.getItem("username");
+        console.log(username);
+        if (username.length !== 0) {
+            document.getElementById('logged').innerHTML = `<li class="nav-item">
+                            <a class="nav-link" href="/" class="navbar_link" id="logged" onclick="logout()">Logout</a>
+                        </li>`;
+        }
+    </script>
+</body>
+
+</html>

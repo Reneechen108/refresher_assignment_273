@@ -4,7 +4,7 @@ const users = [
   {
     id: 1,
     username: "admin",
-    password: "123",
+    password: "admin123",
     role: "A"
   },
   {
@@ -31,45 +31,66 @@ const users = [
   {
     id: 5,
     username: "chen",
-    password: "123",
+    password: "admin123",
     age: 34,
     role: "U"
   }
 ];
 
-function login() {
+
+function signup() {
     let success = `<h1 id="id01">Login Successfully</h1>`
+    let fail = `<h1 id="id01">Login Fail</h1>`
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    let conPassword = document.getElementById('conPassword').value;
+    let email = document.getElementById('email').value;
+    let zip = document.getElementById('zip').value;
+    if (password !== conPassword) {
+        alert("Password is not the same!");
+        return;
+    }
+
+    let userReg = /^[a-zA-Z\-]+$/;
+    let passReg = /^[A-Za-z]\w{7,14}$/;
+    let emailReg = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    let zipReg = /[0-9]{5}/;
+
+    if(userReg.test(username) && passReg.test(password) && emailReg.test(email) && zipReg.test(zip)){
+        window.location.href = "/";
+    }
+    return false;
+}
+
+function login() {
+    // let success = `<h1 id="id01">Login Successfully</h1>`
     let fail = `<h1 id="id01">Login Fail</h1>`
     let success_admin = `<h1 id="id01">Login Admin</h1>`
     let success_user = `<h1 id="id01">Login User</h1>`
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
-    let conPassword = document.getElementById('conPassword').value;
-    if(password !== conPassword){
-        alert("Password is not the same!");
-    }
+
     //arrow functions
     let user = users.filter(user => (user.username === username && user.password === password));
     // typeof
     if(typeof(user[0]) === 'undefined'){
-        document.getElementById("old").innerHTML = fail;
+        document.getElementById("old").innerHTML = fail + `<a href="/">Back To Login</a>`;
     }else{
         if(user[0].role === "U"){
             document.getElementById("old").innerHTML = success_user;
-            location.href="user_home.html";
+            window.location.href = "/user_home";
         }else{
             document.getElementById("old").innerHTML = success_admin;
-            displayUser();
+            window.location.href = "/admin";
         }
-        
     }
+    return false;
 }
 
 // arrow functions
 function Arrow() {
-    let h = "Welcome to my website";
+    let h = `<h5 id="headding">arrow functions</h5>Welcome to my website`;
     return () => {
-        console.log(h);
         document.getElementById("heading").innerHTML = h;
     }
 }
@@ -77,7 +98,7 @@ const arrow = new Arrow();
 arrow();
 
 function displayUser() {
-    // split
+    // split and slice
     let str = "admin lin zhang luo chen";
     let res = str.split(" ");
     console.log(res);
@@ -86,13 +107,13 @@ function displayUser() {
     let regular_user = users_inside.slice(1,users_inside.length)
     console.log(regular_user);
     for(let i = 0; i < regular_user.length; i++){
-        document.getElementById("user_list").innerHTML += regular_user[i] + `<button onclick="getInfo(${i+2})">check</button>` + `<button onclick="updateInfo(${i})">update</button>` + "<br >";
+        document.getElementById("user_list").innerHTML += regular_user[i] + `<button type="button" class="btn btn-info" onclick="getInfo(${i+2})">Check</button>` + 
+        `<button type="button" class="btn btn-info" onclick="updateInfo(${i})">Update</button>` + "<p></p>";
     }
 }
 
 function getInfo(i) {
     console.log(i);
-    // let current_user = users[i+1];
     let current_user = users.filter(user => (user.id === i));
     console.log(current_user);
     document.getElementById("user_info").innerHTML = '';
@@ -119,20 +140,20 @@ function updateInfo(i) {
     // Object.assign
     Object.assign(users[id+1], newUser)
 
+
+    let roleArr = [oldRole, role]
     function displayRole(old, role) {
         console.log(`Change the role from ${old} to ${this.role}`);
         document.getElementById("user_info").innerHTML = `${this.username} change the role from ${old} to ${role}`;
     }
 
-    let roleArr = [oldRole, role]
-
     // a. call, apply, bind
-    displayRole.call(user, oldRole, role);
-    displayRole.apply(user, roleArr);
+    displayRole.call(user, oldRole, role); // call needs to add other variables as parameters
 
-    let bindFun = displayRole.bind(user);
-    bindFun(oldRole, role);
-    
+    displayRole.apply(user, roleArr); // apply needs to add the list with other variables inside as parameters
+
+    let bindFun = displayRole.bind(user); 
+    bindFun(oldRole, role); // unlike call and apply, use variables as parameter to the function, bind use the function directly and use the variable as parameter    
 }
 
 function refresh() {
@@ -146,27 +167,17 @@ function refresh() {
 }
 
 function addUser() {
-    let txt = '{"id": 6, "username":"John", "password":1234130, "age": 20, "role":"U"}'
+    let txt = '{"id": 6, "username":"john", "password":1234130, "age": 20, "role":"U"}'
     // JSON.parse
     let newObject = JSON.parse(txt);
     users.push(newObject)
     // JSON.stringify
     let myJSON = JSON.stringify(users);
-    document.getElementById("demo").innerHTML = myJSON;
+    document.getElementById("user_list").innerHTML = '';
+    document.getElementById("user_info").innerHTML = '';
+    document.getElementById("user_list").innerHTML += users[users.length-1].username + `<button type="button" class="btn btn-info" onclick="getInfo(${users[users.length-1].id})">Check</button>` + 
+        `<button type="button" class="btn btn-info" onclick="updateInfo(${users[users.length-1].id-2})">Update</button>` + "<br >";
 }
-
-function avgAge() {
-    let age_inside = users.map(user => user.age);
-    console.log("age_inside: ", age_inside);
-    let ages = age_inside.slice(1,age_inside.length)
-    console.log("ages: ", ages);
-    // require
-    require(['count'], function (count){
-    // console.log("count: ", counter([ages]));
-        document.getElementById("age").innerHTML = avg([ages]);
-    });
-}
-
 
 function search() {
     // regular expressions
@@ -176,8 +187,13 @@ function search() {
     document.getElementById("user_list").innerHTML = '';
     if(userResult){
         let current_user = users.filter(user => (user.username === username));
-        console.log(current_user[0].id);
-        document.getElementById("user_list").innerHTML += current_user[0].username + `<button onclick="getInfo(${current_user[0].id})">check</button>` + `<button onclick="updateInfo(${current_user[0].id-2})">update</button>` + "<br >";
+        if(current_user.length !== 0){
+            console.log(current_user[0].id);
+            document.getElementById("user_list").innerHTML += current_user[0].username + `<button type="button" class="btn btn-info" onclick="getInfo(${current_user[0].id})">Check</button>` + 
+        `<button type="button" class="btn btn-info" onclick="updateInfo(${current_user[0].id-2})">Update</button>` + "<br >";
+        }else{
+            alert("username is not exist");
+        }
     }else{
         alert("username is incorrect");
     }
@@ -190,7 +206,6 @@ function changeRole(admin){
     user_role = changeAdmin;
     console.log(user_role);
     console.log(changeAdmin);
-    
 }
 
 
