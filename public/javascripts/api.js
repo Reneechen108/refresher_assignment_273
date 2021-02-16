@@ -16,6 +16,8 @@ function getData(){
 }
 
 // async await 
+// async await  makes your asynchronous code look more synchronous
+// async await needs to show as a pair
 async function getHouses() {
     if(localStorage.getItem("username") !== "admin"){
         let success_user = `<h1>Login User</h1>`;
@@ -71,6 +73,9 @@ function getLocation() {
 
 function getOverview() {
     // Promise
+    // It can return something, and accpet resolve and reject two parameters
+    // Promise is an object, need to get the value in the then method
+    // Promise is used to handle the asynchronous
     function ajax(URL) {
         return new Promise(function (resolve, reject) {
             var request = new XMLHttpRequest(); 
@@ -111,6 +116,7 @@ function getTop() {
     }
     
     // callbacks
+    // callback is a function that is passed to another function.
     function sortFun(list) {
         let prices = list.sort(function(a, b){return b - a});
         return prices;
